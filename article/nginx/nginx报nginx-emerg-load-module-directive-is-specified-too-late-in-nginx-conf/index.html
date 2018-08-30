@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          About - 李钿田 | Blog |二田|devops
+          nginx报nginx: [emerg] load_module directive is specified too late in nginx.conf - 李钿田 | Blog |二田|devops
         
     </title>
 
-    <link rel="canonical" href="http://www.54im.com/about/">
+    <link rel="canonical" href="http://www.54im.com/article/nginx/nginx报nginx-emerg-load-module-directive-is-specified-too-late-in-nginx-conf/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/about.jpg')
-            /*page*/
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">走在成为极客的路上</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Nginx" title="Nginx">Nginx</a>
+                            
+                        </div>
+                        <h1>nginx报nginx: [emerg] load_module directive is specified too late in nginx.conf</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 二田 on
+                            2018-08-30
+                        </span>
                     </div>
                 
 
@@ -189,50 +197,103 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <h3 id="一句话">一句话</h3>
-<blockquote>
-<p>胖子想减肥</p>
-</blockquote>
-<h3 id="关于我">关于我</h3>
-<blockquote>
-<p>打杂中成长</p>
-</blockquote>
-<h3 id="兴趣方向">兴趣方向</h3>
-<blockquote>
-<p>容器云（Docker、Kubernetes等）相关生态技术研究。<br>
-监控方面技术研究。</p>
-</blockquote>
-<h3 id="参与社区">参与社区</h3>
-<blockquote>
-<p>Github:<a href="https://github.com/ivonlee" target="_blank" rel="noopener">https://github.com/ivonlee</a></p>
-</blockquote>
-<h3 id="联系我">联系我</h3>
-<blockquote>
-<p>Email: <a href="mailto:ldtrain@gmail.com" target="_blank" rel="noopener">ldtrain@gmail.com</a></p>
-</blockquote>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
+            <!-- Post Container -->
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">-->
+            <div class="col-lg-10 col-md-10 post-container">
 
-                <!-- 如果开启评论功能 -->
+                <h1 id="前戏">前戏</h1>
+<p>最近在openresty上增加了weibo开源的 <a href="https://github.com/weibocom/nginx-upsync-module" target="_blank" rel="noopener">upsync</a> 然后load了新增加的模块，检查配置文件的时候报错</p>
+<h1 id="报错信息">报错信息</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx: [emerg] &quot;load_module&quot; directive is specified too late in /etc/nginx/nginx.conf:13</span><br><span class="line">nginx: configuration file /etc/nginx/nginx.conf test failed</span><br></pre></td></tr></table></figure>
+<h1 id="解决">解决</h1>
+<p>load_module 必须在全局配置后进行配置，如下例子就是正确的：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">user  nginx;</span><br><span class="line">worker_processes  4;</span><br><span class="line"></span><br><span class="line">load_module "modules/ngx_http_upsync_module.so";</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  10240;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>就这么简单，调换个顺序，Nginx 就不会报错了。其实这样设计，也很容易理解吧，毕竟 load_module 是需要在每个 block （包括 events、http、stream、mail）之前进行加载并运行的，虽然说 /etc/nginx/nginx.conf 是声明式的配置文件，但是必须这样声明在一定程度也有利于告诉开发者其顺序的重要性吧。</p>
+
                 
-                    <hr>
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#前戏"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前戏</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#报错信息"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">报错信息</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#解决"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">解决</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="col-lg-10 col-md-10  sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Nginx" title="Nginx">Nginx</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.didispace.com/" target="_blank">程序猿DD</a></li>
+                    
+                        <li><a href="https://www.cnxct.com/" target="_blank">莿鸟栖草堂</a></li>
+                    
+                </ul>
+                
+
 <!-- 来必力City版安装代码 -->
 <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTM2NC8xNTg5MQ==">
-	<script type="text/javascript">
+<script type="text/javascript">
    (function(d, s) {
        var j, e = d.getElementsByTagName(s)[0];
 
@@ -244,130 +305,56 @@
 
        e.parentNode.insertBefore(j, e);
    })(document, 'script');
-	</script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
 </div>
 <!-- City版安装代码已完成 -->
-                    
 
-                    
-
-
-                    
-
-                    
-                
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
 
-        
-            <img id = "avatar_pic" src="/img/avatar/dinosaur.png" />
-        
 
-        
-            <p>Stay hungry,Stay foolish</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
 
-            
 
-            
 
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/ivonlee">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/article/nginx/nginx报nginx-emerg-load-module-directive-is-specified-too-late-in-nginx-conf/">nginx报nginx: [emerg] load_module directive is specified too late in nginx.conf</a>
-        </li>
-      
-    </ul>
-  </div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-        <hr>
-    
-        <!-- Friends Blog -->
-
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-
-    
-        <li><a href="http://blog.didispace.com/" target="_blank">程序猿DD</a></li>
-    
-        <li><a href="https://www.cnxct.com/" target="_blank">莿鸟栖草堂</a></li>
-    
-</ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-        <!-- Categories -->
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->

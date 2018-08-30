@@ -3,12 +3,17 @@
 
     <sitemap>
         <loc>http://www.54im.com/post-sitemap.xml</loc>
-        <lastmod>2018-08-30T01:44:06.502Z</lastmod>
+        <lastmod>2018-08-30T03:44:38.366Z</lastmod>
     </sitemap>
 
     <sitemap>
         <loc>http://www.54im.com/page-sitemap.xml</loc>
-        <lastmod>2018-08-29T01:11:11.285Z</lastmod>
+        <lastmod>2018-08-30T03:38:32.756Z</lastmod>
+    </sitemap>
+
+    <sitemap>
+        <loc>http://www.54im.com/tag-sitemap.xml</loc>
+        <lastmod>2018-08-30T03:44:38.366Z</lastmod>
     </sitemap>
 
 </sitemapindex>

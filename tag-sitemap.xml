@@ -2,8 +2,8 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://www.54im.com/tags/Hexo/</loc>
-        <lastmod>2018-08-29T01:11:11.234Z</lastmod>
+        <loc>http://www.54im.com/tags/Nginx/</loc>
+        <lastmod>2018-08-30T03:44:38.366Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

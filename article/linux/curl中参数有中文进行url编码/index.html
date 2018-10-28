@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          curl中参数有中文进行url编码 - 李钿田 | Blog |二田|devops
+        
+    </title>
+
+    <link rel="canonical" href="http://www.54im.com/article/linux/curl中参数有中文进行url编码/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#curl" title="curl">curl</a>
+                            
+                        </div>
+                        <h1>curl中参数有中文进行url编码</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 二田 on
+                            2018-10-28
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">二田</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">-->
+            <div class="col-lg-10 col-md-10 post-container">
+
+                <h1 id="问题">问题</h1>
+<p>curl get请求的时候，如果参数中有中文，在浏览器访问的时候，默认是会进行编码的</p>
+<p>但是通过curl的时候，后端python或者其他域名接受到的get请求参数不会是中文，还需要转码</p>
+<h1 id="解决">解决</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -G --data-urlencode "type=text" --data-urlencode "content=哈哈哈" www.test.com</span><br></pre></td></tr></table></figure>
+<h1 id="附录">附录</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">curl是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载，所以是综合传输工具，但按传统，习惯称url为下载工具。</span><br><span class="line"></span><br><span class="line">-a/--append 上传文件时，附加到目标文件</span><br><span class="line"> -A/--user-agent &lt;string&gt;  设置用户代理发送给服务器</span><br><span class="line"> - anyauth   可以使用“任何”身份验证方法</span><br><span class="line"> -b/--cookie &lt;name=string/file&gt; cookie字符串或文件读取位置</span><br><span class="line"> - basic 使用HTTP基本验证</span><br><span class="line"> -B/--use-ascii 使用ASCII /文本传输</span><br><span class="line"> -c/--cookie-jar &lt;file&gt; 操作结束后把cookie写入到这个文件中</span><br><span class="line"> -C/--continue-at &lt;offset&gt;  断点续转</span><br><span class="line"> -d/--data &lt;data&gt;   HTTP POST方式传送数据</span><br><span class="line"> --data-ascii &lt;data&gt;  以ascii的方式post数据</span><br><span class="line"> --data-binary &lt;data&gt; 以二进制的方式post数据</span><br><span class="line"> --negotiate     使用HTTP身份验证</span><br><span class="line"> --digest        使用数字身份验证</span><br><span class="line"> --disable-eprt  禁止使用EPRT或LPRT</span><br><span class="line"> --disable-epsv  禁止使用EPSV</span><br><span class="line"> -D/--dump-header &lt;file&gt; 把header信息写入到该文件中</span><br><span class="line"> --egd-file &lt;file&gt; 为随机数据(SSL)设置EGD socket路径</span><br><span class="line"> --tcp-nodelay   使用TCP_NODELAY选项</span><br><span class="line"> -e/--referer 来源网址</span><br><span class="line"> -E/--cert &lt;cert[:passwd]&gt; 客户端证书文件和密码 (SSL)</span><br><span class="line"> --cert-type &lt;type&gt; 证书文件类型 (DER/PEM/ENG) (SSL)</span><br><span class="line"> --key &lt;key&gt;     私钥文件名 (SSL)</span><br><span class="line"> --key-type &lt;type&gt; 私钥文件类型 (DER/PEM/ENG) (SSL)</span><br><span class="line"> --pass  &lt;pass&gt;  私钥密码 (SSL)</span><br><span class="line"> --engine &lt;eng&gt;  加密引擎使用 (SSL). &quot;--engine list&quot; for list</span><br><span class="line"> --cacert &lt;file&gt; CA证书 (SSL)</span><br><span class="line"> --capath &lt;directory&gt; CA目录 (made using c_rehash) to verify peer against (SSL)</span><br><span class="line"> --ciphers &lt;list&gt;  SSL密码</span><br><span class="line"> --compressed    要求返回是压缩的形势 (using deflate or gzip)</span><br><span class="line"> --connect-timeout &lt;seconds&gt; 设置最大请求时间</span><br><span class="line"> --create-dirs   建立本地目录的目录层次结构</span><br><span class="line"> --crlf          上传是把LF转变成CRLF</span><br><span class="line"> -f/--fail          连接失败时不显示http错误</span><br><span class="line"> --ftp-create-dirs 如果远程目录不存在，创建远程目录</span><br><span class="line"> --ftp-method [multicwd/nocwd/singlecwd] 控制CWD的使用</span><br><span class="line"> --ftp-pasv      使用 PASV/EPSV 代替端口</span><br><span class="line"> --ftp-skip-pasv-ip 使用PASV的时候,忽略该IP地址</span><br><span class="line"> --ftp-ssl       尝试用 SSL/TLS 来进行ftp数据传输</span><br><span class="line"> --ftp-ssl-reqd  要求用 SSL/TLS 来进行ftp数据传输</span><br><span class="line"> -F/--form &lt;name=content&gt; 模拟http表单提交数据</span><br><span class="line"> -form-string &lt;name=string&gt; 模拟http表单提交数据</span><br><span class="line"> -g/--globoff 禁用网址序列和范围使用&#123;&#125;和[]</span><br><span class="line"> -G/--get 以get的方式来发送数据</span><br><span class="line"> -h/--help 帮助</span><br><span class="line"> -H/--header &lt;line&gt;自定义头信息传递给服务器</span><br><span class="line"> --ignore-content-length  忽略的HTTP头信息的长度</span><br><span class="line"> -i/--include 输出时包括protocol头信息</span><br><span class="line"> -I/--head  只显示文档信息</span><br><span class="line"> 从文件中读取-j/--junk-session-cookies忽略会话Cookie</span><br><span class="line"> - 界面&lt;interface&gt;指定网络接口/地址使用</span><br><span class="line"> - krb4 &lt;级别&gt;启用与指定的安全级别krb4</span><br><span class="line"> -j/--junk-session-cookies 读取文件进忽略session cookie</span><br><span class="line"> --interface &lt;interface&gt; 使用指定网络接口/地址</span><br><span class="line"> --krb4 &lt;level&gt;  使用指定安全级别的krb4</span><br><span class="line"> -k/--insecure 允许不使用证书到SSL站点</span><br><span class="line"> -K/--config  指定的配置文件读取</span><br><span class="line"> -l/--list-only 列出ftp目录下的文件名称</span><br><span class="line"> --limit-rate &lt;rate&gt; 设置传输速度</span><br><span class="line"> --local-port&lt;NUM&gt; 强制使用本地端口号</span><br><span class="line"> -m/--max-time &lt;seconds&gt; 设置最大传输时间</span><br><span class="line"> --max-redirs &lt;num&gt; 设置最大读取的目录数</span><br><span class="line"> --max-filesize &lt;bytes&gt; 设置最大下载的文件总量</span><br><span class="line"> -M/--manual  显示全手动</span><br><span class="line"> -n/--netrc 从netrc文件中读取用户名和密码</span><br><span class="line"> --netrc-optional 使用 .netrc 或者 URL来覆盖-n</span><br><span class="line"> --ntlm          使用 HTTP NTLM 身份验证</span><br><span class="line"> -N/--no-buffer 禁用缓冲输出</span><br><span class="line"> -o/--output 把输出写到该文件中</span><br><span class="line"> -O/--remote-name 把输出写到该文件中，保留远程文件的文件名</span><br><span class="line"> -p/--proxytunnel   使用HTTP代理</span><br><span class="line"> --proxy-anyauth 选择任一代理身份验证方法</span><br><span class="line"> --proxy-basic   在代理上使用基本身份验证</span><br><span class="line"> --proxy-digest  在代理上使用数字身份验证</span><br><span class="line"> --proxy-ntlm    在代理上使用ntlm身份验证</span><br><span class="line"> -P/--ftp-port &lt;address&gt; 使用端口地址，而不是使用PASV</span><br><span class="line"> -Q/--quote &lt;cmd&gt;文件传输前，发送命令到服务器</span><br><span class="line"> -r/--range &lt;range&gt;检索来自HTTP/1.1或FTP服务器字节范围</span><br><span class="line"> --range-file 读取（SSL）的随机文件</span><br><span class="line"> -R/--remote-time   在本地生成文件时，保留远程文件时间</span><br><span class="line"> --retry &lt;num&gt;   传输出现问题时，重试的次数</span><br><span class="line"> --retry-delay &lt;seconds&gt;  传输出现问题时，设置重试间隔时间</span><br><span class="line"> --retry-max-time &lt;seconds&gt; 传输出现问题时，设置最大重试时间</span><br><span class="line"> -s/--silent静音模式。不输出任何东西</span><br><span class="line"> -S/--show-error   显示错误</span><br><span class="line"> --socks4 &lt;host[:port]&gt; 用socks4代理给定主机和端口</span><br><span class="line"> --socks5 &lt;host[:port]&gt; 用socks5代理给定主机和端口</span><br><span class="line"> --stderr &lt;file&gt;</span><br><span class="line"> -t/--telnet-option &lt;OPT=val&gt; Telnet选项设置</span><br><span class="line"> --trace &lt;file&gt;  对指定文件进行debug</span><br><span class="line"> --trace-ascii &lt;file&gt; Like --跟踪但没有hex输出</span><br><span class="line"> --trace-time    跟踪/详细输出时，添加时间戳</span><br><span class="line"> -T/--upload-file &lt;file&gt; 上传文件</span><br><span class="line"> --url &lt;URL&gt;     Spet URL to work with</span><br><span class="line"> -u/--user &lt;user[:password]&gt;设置服务器的用户和密码</span><br><span class="line"> -U/--proxy-user &lt;user[:password]&gt;设置代理用户名和密码</span><br><span class="line"> -v/--verbose</span><br><span class="line"> -V/--version 显示版本信息</span><br><span class="line"> -w/--write-out [format]什么输出完成后</span><br><span class="line"> -x/--proxy &lt;host[:port]&gt;在给定的端口上使用HTTP代理</span><br><span class="line"> -X/--request &lt;command&gt;指定什么命令</span><br><span class="line"> -y/--speed-time 放弃限速所要的时间。默认为30</span><br><span class="line"> -Y/--speed-limit 停止传输速度的限制，速度时间&apos;秒</span><br><span class="line"> -z/--time-cond  传送时间设置</span><br><span class="line"> -0/--http1.0  使用HTTP 1.0</span><br><span class="line"> -1/--tlsv1  使用TLSv1（SSL）</span><br><span class="line"> -2/--sslv2 使用SSLv2的（SSL）</span><br><span class="line"> -3/--sslv3         使用的SSLv3（SSL）</span><br><span class="line"> --3p-quote      like -Q for the source URL for 3rd party transfer</span><br><span class="line"> --3p-url        使用url，进行第三方传送</span><br><span class="line"> --3p-user       使用用户名和密码，进行第三方传送</span><br><span class="line"> -4/--ipv4   使用IP4</span><br><span class="line"> -6/--ipv6   使用IP6</span><br><span class="line"> -#/--progress-bar 用进度条显示当前的传送状态</span><br></pre></td></tr></table></figure>
+<h1 id="参考">参考</h1>
+<p><a href="http://linux.51yip.com/search/curl" target="_blank" rel="noopener">http://linux.51yip.com/search/curl</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/linux/curl提交json数据中包含shell变量/" data-toggle="tooltip" data-placement="top" title="curl提交json数据中包含shell变量">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#问题"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">问题</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#解决"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">解决</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#附录"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">附录</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#参考"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">参考</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="col-lg-10 col-md-10  sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#curl" title="curl">curl</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.didispace.com/" target="_blank">程序猿DD</a></li>
+                    
+                        <li><a href="https://www.cnxct.com/" target="_blank">莿鸟栖草堂</a></li>
+                    
+                </ul>
+                
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTM2NC8xNTg5MQ==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/ivonlee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二田 2018 
+                    <br>
+                    Theme by <a href="http://beantech.org">BeanTech</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.54im.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'r45fhy7653897235wg5ye709d930f62e';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.54im.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

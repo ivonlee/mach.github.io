@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Tags - 李钿田 | Blog |二田|devops
+          python如何将字符串形式的列表转成列表 - 李钿田 | Blog |二田|devops
         
     </title>
 
-    <link rel="canonical" href="http://www.54im.com/tags/">
+    <link rel="canonical" href="http://www.54im.com/article/python/python如何将字符串形式的列表转成列表/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/tag.png')
-            /*page*/
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>Tags</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Hey, this is Tags.</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#python" title="python">python</a>
+                            
+                        </div>
+                        <h1>python如何将字符串形式的列表转成列表</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 二田 on
+                            2018-10-28
+                        </span>
                     </div>
                 
 
@@ -189,221 +197,173 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-            <div id='tag_cloud' class="tags">
-                
-                    <a href="#curl" title="curl" rel="3">curl</a>
-                
-                    <a href="#Python" title="Python" rel="1">Python</a>
-                
-                    <a href="#MySQL" title="MySQL" rel="1">MySQL</a>
-                
-                    <a href="#jira" title="jira" rel="1">jira</a>
-                
-                    <a href="#confluence" title="confluence" rel="1">confluence</a>
-                
-                    <a href="#Nginx" title="Nginx" rel="1">Nginx</a>
-                
-                    <a href="#python" title="python" rel="1">python</a>
-                
-            </div>
+    <!-- Modify by Yu-Hsuan Yen -->
 
-            <!-- 标签列表 -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="curl">
-                    <span class="tag-text">curl</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/linux/curl中参数有中文进行url编码/">
-                        <h2 class="post-title">
-                            curl中参数有中文进行url编码
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/linux/curl提交json数据中包含shell变量/">
-                        <h2 class="post-title">
-                            curl提交json数据中包含shell变量
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/linux/curl设置超时时间/">
-                        <h2 class="post-title">
-                            curl设置超时时间
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Python">
-                    <span class="tag-text">Python</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/python/Centos7-yum部署python3-6-配置虚拟环境/">
-                        <h2 class="post-title">
-                            Centos7 yum部署python3.6 并配置虚拟环境
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="MySQL">
-                    <span class="tag-text">MySQL</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/mysql/centos7部署Inception/">
-                        <h2 class="post-title">
-                            centos7部署Inception
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="jira">
-                    <span class="tag-text">jira</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/jira-confluence/jira-confluence配置腾讯域名邮箱/">
-                        <h2 class="post-title">
-                            jira配置腾讯域名邮箱
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="confluence">
-                    <span class="tag-text">confluence</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/jira-confluence/jira-confluence配置腾讯域名邮箱/">
-                        <h2 class="post-title">
-                            jira配置腾讯域名邮箱
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Nginx">
-                    <span class="tag-text">Nginx</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/nginx/nginx报nginx-emerg-load-module-directive-is-specified-too-late-in-nginx-conf/">
-                        <h2 class="post-title">
-                            nginx报nginx: [emerg] load_module directive is specified too late in nginx.conf
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="python">
-                    <span class="tag-text">python</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/python/python如何将字符串形式的列表转成列表/">
-                        <h2 class="post-title">
-                            python如何将字符串形式的列表转成列表
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
+            <!-- Post Container -->
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">-->
+            <div class="col-lg-10 col-md-10 post-container">
 
+                <h1 id="例子">例子</h1>
+<h2 id="json">json</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; str='[1,2,3]'</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; type(str)</span><br><span class="line">&lt;class 'str'&gt;</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; import json</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; json.loads(str)</span><br><span class="line">[1, 2, 3]</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="ast-literal_eval">ast. literal_eval</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; import ast</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; str='[1,2,3]'</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; type(str)</span><br><span class="line">&lt;class 'str'&gt;</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; ast.literal_eval(str)</span><br><span class="line">[1, 2, 3]</span><br></pre></td></tr></table></figure>
+<h2 id="eval">eval</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; str='[1,2,3]'</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; type(str)</span><br><span class="line">&lt;class 'str'&gt;</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; eval(str)</span><br><span class="line">[1, 2, 3]</span><br></pre></td></tr></table></figure>
+<p>不推荐,不信你看,就问你怕不怕</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; str="__import__('os').system('df -h')"</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; type(str)</span><br><span class="line">&lt;class 'str'&gt;</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; eval(str)</span><br><span class="line">Filesystem      Size   Used  Avail Capacity iused               ifree %iused  Mounted on</span><br><span class="line">/dev/disk1s1   233Gi  156Gi   64Gi    71% 1672221 9223372036853103586    0%   /</span><br><span class="line">devfs          202Ki  202Ki    0Bi   100%     698                   0  100%   /dev</span><br><span class="line">/dev/disk1s4   233Gi   13Gi   64Gi    18%      13 9223372036854775794    0%   /private/var/vm</span><br><span class="line">map -hosts       0Bi    0Bi    0Bi   100%       0                   0  100%   /net</span><br><span class="line">map auto_home    0Bi    0Bi    0Bi   100%       0                   0  100%   /home</span><br></pre></td></tr></table></figure>
 
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/linux/curl提交json数据中包含shell变量/" data-toggle="tooltip" data-placement="top" title="curl提交json数据中包含shell变量">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/linux/curl设置超时时间/" data-toggle="tooltip" data-placement="top" title="curl设置超时时间">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#例子"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">例子</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#json"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">json</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ast-literal_eval"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">ast. literal_eval</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#eval"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">eval</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="col-lg-10 col-md-10  sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.didispace.com/" target="_blank">程序猿DD</a></li>
+                    
+                        <li><a href="https://www.cnxct.com/" target="_blank">莿鸟栖草堂</a></li>
+                    
+                </ul>
+                
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTM2NC8xNTg5MQ==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+            </div>
         </div>
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          curl设置超时时间 - 李钿田 | Blog |二田|devops
+        
+    </title>
+
+    <link rel="canonical" href="http://www.54im.com/article/linux/curl设置超时时间/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#curl" title="curl">curl</a>
+                            
+                        </div>
+                        <h1>curl设置超时时间</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 二田 on
+                            2018-10-28
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">二田</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">-->
+            <div class="col-lg-10 col-md-10 post-container">
+
+                <h1 id="问题">问题</h1>
+<p>从程序日志看到访问某个域名报 java.net.SocketTimeoutException: failed: connect timed out to <a href="http://xxx.com" target="_blank" rel="noopener">xxx.com</a><br>
+偶尔会超时，手动测试了下，也出现了几次 http code是000，比较奇怪</p>
+<h1 id="解决过程">解决过程</h1>
+<h2 id="常见的返回码">常见的返回码</h2>
+<blockquote>
+<p>1）2XX 成功；<br>
+2）3XX 重定向；<br>
+3）4XX 客户端错误；<br>
+4）5XX 服务器端错误；</p>
+</blockquote>
+<p>手动测试结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>curl -o /dev/null -s -w "http_code %&#123;http_code&#125;\ntime_namelookup %&#123;time_namelookup&#125;ntime_connect %&#123;time_connect&#125;\ntime_starttransfer %&#123;time_starttransfer&#125;\ntime_total %&#123;time_total&#125;" "http://www.54im.com"</span><br><span class="line">http_code:000            </span><br><span class="line">time_namelookup:0.000        ——DNS域名解析时间</span><br><span class="line">time_connect:0.000           ——client和server端建立TCP 连接的时间</span><br><span class="line">time_starttransfer:0.000     ——从client发出请求；到web的server 响应第一个字节的时间</span><br><span class="line">time_total:0.000             ——client发出请求；到web的server发送会所有的相应数据的时间</span><br></pre></td></tr></table></figure>
+<h2 id="http-code-000产生原因">http code 000产生原因</h2>
+<p>什么情况下会有000情况呢<br>
+经过测试发现在curl的时候出现000的情况有如下几种：</p>
+<p><strong>1.Failed DNS resolution (6)</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> curl -w "%&#123;http_code&#125;\n" http://example.invalid/ ; echo "Exit code: $?"</span><br><span class="line">000</span><br><span class="line">curl: (6) Could not resolve host: example.invalid</span><br><span class="line">Exit code: 6</span><br></pre></td></tr></table></figure>
+<p><strong>2.Connection refused (7)</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> curl -w "%&#123;http_code&#125;\n" http://localhost:81/ ; echo "Exit code: $?"</span><br><span class="line">000</span><br><span class="line">curl: (7) Failed to connect to localhost port 81: Connection refused</span><br><span class="line">Exit code: 7</span><br></pre></td></tr></table></figure>
+<p><strong>3.Connection timed out (28)</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> curl -w "%&#123;http_code&#125;\n" -m 5 http://10.255.255.1/ ; echo "Exit code: $?"</span><br><span class="line">000</span><br><span class="line">curl: (28) Connection timed out after 5001 milliseconds</span><br><span class="line">Exit code: 28</span><br></pre></td></tr></table></figure>
+<p><strong>4.Server actually returns 000 for some reason (0)</strong></p>
+<p>开启一个监听端口：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 65535 &amp; &lt;&lt;EOF</span><br><span class="line">HTTP/1.1 000 Fake Status Code</span><br><span class="line">Content-Length: 0</span><br><span class="line">Connection: close</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>客户端请求：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> curl -w "%&#123;http_code&#125;\n" http://localhost:65535/ ; echo "Exit code: $?"</span><br><span class="line">000</span><br><span class="line">Exit code: 0</span><br></pre></td></tr></table></figure>
+<h2 id="curl增加超时时间">curl增加超时时间</h2>
+<p>我们遇到的就是code为28的。我开始怀疑是网络环境比较差，我加大了超时时间。<br>
+使用curl时，有两个超时时间：一个是连接超时时间，另一个是数据传输的最大允许时间。<br>
+连接超时时间用 --connect-timeout 参数来指定，数据传输的最大允许时间用 -m 参数来指定。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--connect-timeout &lt;seconds&gt;</span><br><span class="line">    Maximum time in seconds that you allow the connection to the server to take.  This only limits the connection phase, once curl has connected this option is of no more use. See also the -m/--max-time option.</span><br><span class="line">    If this option is used several times, the last one will be used.</span><br></pre></td></tr></table></figure>
+<p>这个是指定连接超时时间。 如果出错， 提示形如：curl: (28) connect() timed out!</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-m/--max-time &lt;seconds&gt;</span><br><span class="line">    Maximum  time  in seconds that you allow the whole operation to take.  This is useful for preventing your batch jobs from hanging for hours due to slow networks or links going down.  See also the --connect-timeout option.</span><br><span class="line">    If this option is used several times, the last one will be used.</span><br></pre></td></tr></table></figure>
+<p>这个是指定整个过程最大的允许时间。 出错提示如：curl: (28) Operation timed out after 2000 milliseconds with 0 bytes received</p>
+<p>例如：<br>
+curl --connect-timeout 10 -m 20 &quot;<a href="http://XXXXXXX" target="_blank" rel="noopener">http://XXXXXXX</a>&quot;<br>
+连接超时的话，出错提示形如：<br>
+curl: (28) connect() timed out!<br>
+数据传输的最大允许时间超时的话，出错提示形如：</p>
+<p>curl: (28) Operation timed out after 2000 milliseconds with 0 bytes received</p>
+<p>依然没有用，我写了循环脚本一直curl这个网站的同时也curl了baidu，发生000的时候，curl百度是没有问题的</p>
+<p>说明还是对端网站问题，考虑到我这边网络是NAT，对方系统是否开启了TCP快速回收，或者对单ip频率有限制之类。</p>
+<h2 id="tcp_tw_recycle参数">tcp_tw_recycle参数</h2>
+<p>后来和对方运维沟通确实开启了tcp_tw_recycle</p>
+<p>先来看看这个参数</p>
+<p>net.ipv4.tcp_tw_recycle</p>
+<blockquote>
+<p>tcp_tw_recycle (Boolean; default: disabled; since Linux 2.4)[译者注：来自linux man tcp的描述]<br>
+Enable fast recycling of TIME-WAIT sockets. Enabling this option is not recommended since this causes<br>
+problems when working with NAT (Network Address Translation).</p>
+<p>启用TIME-WAIT状态sockets的快速回收，这个选项不推荐启用。在NAT(Network Address Translation)网络下，会导致大量的TCP连接建立错误。</p>
+</blockquote>
+<p>网上很多linux参数调整指南都建议把这些参数net.ipv4.tcp_tw_recycle 设置1「启用」，用于快速减少在TIME-WAIT状态TCP连接数。</p>
+<h2 id="timestamp是什么">timestamp是什么</h2>
+<p>还有个timestamp先了解下</p>
+<h3 id="什么是timestamp">什么是timestamp</h3>
+<p>tcp_timestamps的本质是记录数据包的发送时间。</p>
+<p>基本步骤如下：</p>
+<blockquote>
+<p>1.发送方在发送数据时，将一个timestamp(表示发送时间)放在包里面<br>
+2.接收方在收到数据包后，在对应的ACK包中将收到的timestamp返回给发送方(echo back)<br>
+3.发送发收到ACK包后，用当前时刻now - ACK包中的timestamp就能得到准确的RTT</p>
+</blockquote>
+<p>RTT（Round Trip Time）由三部分组成：链路的传播时间（propagation delay）、末端系统的处理时间、路由器缓存中的排队和处理时间（queuing delay）。</p>
+<p>简单来说就是我发送一个数据包，然后对端回一个ack，那么当我接到ack之后，就能计算出从我发送出包到接到过了多久，这个时间就是RTT，所以RTT的变化在一定程度上反应了网络的拥塞程度。</p>
+<p>RTO就是tcp在发送一个数据包之后，会启动一个重传定时器，而RTO就是这个定时器的重传时间。 在通俗的讲就是，我一开始预先算个定时器时间，如果你回复了ack那正好，如果没有回复给我ack，然后RTO定时器的时间又到了，那么我就重传。</p>
+<p>若没有timestamp就会采用SKB-&gt;when的方式计算RTT，基本步骤如下：</p>
+<blockquote>
+<p>1.TCP层在发送出一个SKB时，使用skb-&gt;when记录发送出去的时间<br>
+2.TCP层在收到SKB数据包的确认时，使用now - skb-&gt;when来计算RTT</p>
+</blockquote>
+<p>这时会存在一个缺陷，如当进行如下操作：</p>
+<blockquote>
+<p>1.tcp层首次发送SKB时间是send_time1，然后丢包发生重传，重传一个数据包的时间是send_time2<br>
+2.tcp层收到SKB的确认包的时间是recv_time</p>
+</blockquote>
+<p>这样无法判断recv_time对应ACK是确认第一次数据包的发送还是确认第二次重传的数据包。</p>
+<p>timestamp存在什么负面影响？</p>
+<p>会产生10字节的TCP header开销</p>
+<h3 id="什么是recycle">什么是recycle</h3>
+<p>表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭</p>
+<p>对客户端和服务器同时起作用，开启后在 3.5*RTO 内回收，RTO 200ms~ 120s 具体时间视网络状况。</p>
+<h3 id="什么是per-host-paws机制">什么是Per-host PAWS机制？</h3>
+<p>在高带宽下，TCP序列号可能在较短的时间内就被重复使用(recycle/wrapped)，就可能导致同一条TCP流在短时间内出现序号一样的两个合法的数据包及其确认包！</p>
+<p>PAWS机制就是为了应对这一现象设计的，这种机制要求所有来个同一个host IP的TCP数据包的</p>
+<p>timestamp值是递增的。当收到一个timestamp值，小于服务端记录的对应值后，则会认为这是一个过期的数据包，然后会将其丢弃。</p>
+<p>那么问题就来了</p>
+<ol>
+<li>同时开启tcp_timestamp和tcp_tw_recycle会启用TCP/IP协议栈的per-host的PAWS机制</li>
+<li>经过同一NAT转换后的来自不同真实client的数据流，在服务端看来是于同一host打交道</li>
+<li>虽然经过同一NAT转化，但由于不同真实client会携带各自的timestamp值<br>
+因而无法保证整过NAT转化后的数据包携带的timestamp值严格递增</li>
+<li>当服务器的per-host PAWS机制被触发后，会丢弃timestamp值不符合递增条件的数据包</li>
+</ol>
+<blockquote>
+<p>这个参数在 kernel 的4.12后 tcp_tw_recycle都被去掉了</p>
+</blockquote>
+<p>最后去掉这个配置后，没有再出现过超时情况了。</p>
+<h1 id="参考链接">参考链接</h1>
+<p><a href="https://www.cnblogs.com/xkops/p/5614366.html" target="_blank" rel="noopener">https://www.cnblogs.com/xkops/p/5614366.html</a><br>
+<a href="http://perthcharles.github.io/2015/08/27/timestamp-NAT/" target="_blank" rel="noopener">http://perthcharles.github.io/2015/08/27/timestamp-NAT/</a><br>
+<a href="https://www.cnxct.com/coping-with-the-tcp-time_wait-state-on-busy-linux-servers-in-chinese-and-dont-enable-tcp_tw_recycle/" target="_blank" rel="noopener">https://www.cnxct.com/coping-with-the-tcp-time_wait-state-on-busy-linux-servers-in-chinese-and-dont-enable-tcp_tw_recycle/</a><br>
+<a href="http://blog.51cto.com/12814931/2126617" target="_blank" rel="noopener">http://blog.51cto.com/12814931/2126617</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/python/python如何将字符串形式的列表转成列表/" data-toggle="tooltip" data-placement="top" title="python如何将字符串形式的列表转成列表">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/jira-confluence/jira-confluence配置腾讯域名邮箱/" data-toggle="tooltip" data-placement="top" title="jira配置腾讯域名邮箱">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#问题"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">问题</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#解决过程"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">解决过程</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#常见的返回码"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">常见的返回码</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#http-code-000产生原因"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">http code 000产生原因</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#curl增加超时时间"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">curl增加超时时间</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tcp_tw_recycle参数"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">tcp_tw_recycle参数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#timestamp是什么"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">timestamp是什么</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#什么是timestamp"><span class="toc-nav-number">2.5.1.</span> <span class="toc-nav-text">什么是timestamp</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#什么是recycle"><span class="toc-nav-number">2.5.2.</span> <span class="toc-nav-text">什么是recycle</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#什么是per-host-paws机制"><span class="toc-nav-number">2.5.3.</span> <span class="toc-nav-text">什么是Per-host PAWS机制？</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#参考链接"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">参考链接</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="col-lg-10 col-md-10  sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#curl" title="curl">curl</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.didispace.com/" target="_blank">程序猿DD</a></li>
+                    
+                        <li><a href="https://www.cnxct.com/" target="_blank">莿鸟栖草堂</a></li>
+                    
+                </ul>
+                
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTM2NC8xNTg5MQ==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/ivonlee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二田 2018 
+                    <br>
+                    Theme by <a href="http://beantech.org">BeanTech</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.54im.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'r45fhy7653897235wg5ye709d930f62e';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.54im.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

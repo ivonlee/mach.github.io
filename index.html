@@ -132,6 +132,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -140,13 +147,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -206,6 +206,268 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/article/linux/curl中参数有中文进行url编码/">
+        <h2 class="post-title">
+            curl中参数有中文进行url编码
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            问题
+curl get请求的时候，如果参数中有中文，在浏览器访问的时候，默认是会进行编码的
+但是通过curl的时候，后端python或者其他域名接受到的get请求参数不会是中文，还需要转码
+解决
+1curl -G --data-urlencode "type=text" --data-urlencode "content=哈哈哈" www.test.com
+附录
+12345678910111......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 二田 on
+            2018-10-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#curl" title="curl">curl</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/linux/curl提交json数据中包含shell变量/">
+        <h2 class="post-title">
+            curl提交json数据中包含shell变量
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            问题
+jenkins配置中，最后build成功我会将build信息发送到钉钉中，会将一些变量发出来，这样就需要构造一些json数据
+如果变量被单纯的双引号包裹的话，变量不会被解析。
+curl 中引号说明如下：
+
+The double quotes in the -H arguments (as in -H “foo bar”) tell bash to keep what’s inside ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 二田 on
+            2018-10-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#curl" title="curl">curl</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/python/python如何将字符串形式的列表转成列表/">
+        <h2 class="post-title">
+            python如何将字符串形式的列表转成列表
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            例子
+json
+1234567&gt;&gt;&gt; str='[1,2,3]'&gt;&gt;&gt; type(str)&lt;class 'str'&gt;&gt;&gt;&gt; import json&gt;&gt;&gt; json.loads(str)[1, 2, 3]&gt;&gt;&gt;
+ast. literal_eval
+123456&gt;&gt;&gt; impo......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 二田 on
+            2018-10-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#python" title="python">python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/linux/curl设置超时时间/">
+        <h2 class="post-title">
+            curl设置超时时间
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            问题
+从程序日志看到访问某个域名报 java.net.SocketTimeoutException: failed: connect timed out to xxx.com
+偶尔会超时，手动测试了下，也出现了几次 http code是000，比较奇怪
+解决过程
+常见的返回码
+
+1）2XX 成功；
+2）3XX 重定向；
+3）4XX 客户端错误；
+4）5XX 服务器端错误；
+
+手动测试结果
+1......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 二田 on
+            2018-10-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#curl" title="curl">curl</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/jira-confluence/jira-confluence配置腾讯域名邮箱/">
+        <h2 class="post-title">
+            jira配置腾讯域名邮箱
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            获取邮箱授权码
+打开邮箱点击设置-账户-授权码
+
+需要手机发送短信
+
+获取到邮箱授权码后，可以去jira和confluence后台进行配置了
+Confluence配置
+confluence 设置-邮件服务器
+
+
+这里注意端口是587
+然后用户名 是邮箱
+
+jira配置
+
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 二田 on
+            2018-09-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#jira" title="jira">jira</a>
+            
+              <a href="/tags/#confluence" title="confluence">confluence</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/python/Centos7-yum部署python3-6-配置虚拟环境/">
+        <h2 class="post-title">
+            Centos7 yum部署python3.6 并配置虚拟环境
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            添加yum源
+1$ yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+
+IUS 这个社区，名字的全写是【Inline with Upstream Stable】取首字母，它主要是一个提供新版本RPM包的社区
+
+安装
+1234$  yum makecache$  yum install python36u$  yum......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 二田 on
+            2018-09-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Python" title="Python">Python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/mysql/centos7部署Inception/">
+        <h2 class="post-title">
+            centos7部署Inception
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            环境介绍
+Centos7.4
+Python3.6
+依赖包安装
+
+基础组件
+
+1$ yum install cmake ncurses-devel gcc gcc-c++ openssl-devel ncurses-libs wget git
+
+
+bison2.5.1部署
+
+(注意:centos7 系统自带的bison的版本过高，在后面测试的时候会报错！官方推荐2.6以下版本)
+
+
+
+1234......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 二田 on
+            2018-09-10
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#MySQL" title="MySQL">MySQL</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -270,6 +532,20 @@
     <div class="tags">
         
             
+            <a href="/tags/#curl" title="curl" rel="3">curl</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
     </div>
 </section>
@@ -323,7 +599,23 @@
     <ul>
       
         <li>
-          <a href="/article/nginx/nginx报nginx-emerg-load-module-directive-is-specified-too-late-in-nginx-conf/">nginx报nginx: [emerg] load_module directive is specified too late in nginx.conf</a>
+          <a href="/article/linux/curl中参数有中文进行url编码/">curl中参数有中文进行url编码</a>
+        </li>
+      
+        <li>
+          <a href="/article/linux/curl提交json数据中包含shell变量/">curl提交json数据中包含shell变量</a>
+        </li>
+      
+        <li>
+          <a href="/article/python/python如何将字符串形式的列表转成列表/">python如何将字符串形式的列表转成列表</a>
+        </li>
+      
+        <li>
+          <a href="/article/linux/curl设置超时时间/">curl设置超时时间</a>
+        </li>
+      
+        <li>
+          <a href="/article/jira-confluence/jira-confluence配置腾讯域名邮箱/">jira配置腾讯域名邮箱</a>
         </li>
       
     </ul>
@@ -348,7 +640,7 @@
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
